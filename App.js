@@ -1,14 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Button,Image, StyleSheet, Text, ToastAndroid, View } from 'react-native';
-import { Dimensions } from "react-native";
-const win = Dimensions.get('window');
+
 export default function App() {
   return (
     <View style={styles.container}>
 
       <View style={styles.row}>
-       <Image style={styles.image} source={{uri:"./assets/icon.png"}}/>
+       <Image style={styles.image} source={{
+          uri: 'https://reactnative.dev/img/tiny_logo.png',
+        }}/>
 
        <View >
        <Text style ={styles.title}>Title</Text>
@@ -16,7 +17,7 @@ export default function App() {
        </View>
        <View style={{flex:1, backgroundColor:"red"}}>
          <Text style ={styles.vote}>Vote</Text>
-         <Text style={styles.vote}>tokdsjfnsqkdfjndskto</Text>
+         <Text style={styles.date}>tokdsjfnsqkdfjndskto</Text>
         </View>
        
 
@@ -36,7 +37,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
         height:'20%',
-        width:'100%',
+        width:'90%',
         backgroundColor:"red"
       },
       row: {
@@ -57,8 +58,13 @@ const styles = StyleSheet.create({
         fontWeight:'bold'
       },
       vote:{
+        flex:3,
+        paddingLeft:'80%',
+       
+      },
+      date:{
         flex:1,
-        paddingLeft:'70%',
+        paddingLeft:'60%',
        
       },
       description:{

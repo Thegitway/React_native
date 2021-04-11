@@ -1,17 +1,12 @@
-import React from 'react';
-import { View } from 'react-native';
-import FilmItem from './components/FilmItem.js';
+// App.js
 
-export default function App() {
-  return (
-   <View style={{flex:1}}><FilmItem></FilmItem><FilmItem></FilmItem>
-   <FilmItem></FilmItem></View>
+import React from 'react'
+import Navigation from './Navigation/Navigation'
 
-   
-   
-  );
+export default class App extends React.Component {
+  render() {
+    return (
+      <Navigation/>
+    )
+  }
 }
-
-//google map 
-// video bonde annonce + noter
-//noter le film apres visionage 

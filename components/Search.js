@@ -16,9 +16,9 @@ class Search extends React.Component {
       this.searchText=""
     }
 
-    _displayDetailForFilm = (idf) => {
-      console.log("Display film with id "+idf)
-      this.props.navigation.navigate("FilmDetail", { idFilm: idf })
+    _displayDetailForFilm = (movie) => {
+      console.log("Display film with id "+movie.id)
+      this.props.navigation.navigate("FilmDetail", { film: movie })
     }
 
     getFilms(){
@@ -66,11 +66,16 @@ render() {
                 <Button onPress={()=> this._searchFilms()} color="red" title='Search'>
                     </Button>
                     </View>
-                    <FlatList 
+                    <FlatList
   data={this.state.films}
   keyExtractor={(item)=>item.id.toString()}
-  
-  renderItem={({item}) =>(<FilmItem  displayDetailForFilm={this._displayDetailForFilm} film={item} >
+ /* onEndReachedThreshold={0.5}
+  onEndReached={()=>{
+    if(this.page<this.totalPage)
+    this.getFilms()
+  }}*/
+  renderItem={({item}) =>(<FilmItem  displayDetailForFilm={this._displayDetailForFilm} film={item} 
+  >
   </FilmItem>
   
   )}
@@ -94,6 +99,7 @@ render() {
 
 const styles = StyleSheet.create({
   container: {
+    
     height: 40,
     borderColor:'black',
     margin:8,

@@ -16,3 +16,11 @@ const apiToken="5abac974c69600145236361d229c53a3"
 return 'https://image.tmdb.org/t/p/w500'+name
 }
 
+export function getFilmById(id)
+{
+  const url="https://api.themoviedb.org/3/movie/"+id+"?api_key="+apiToken+"&language=en";
+    return fetch(url)
+    .then((response)=>response.json())
+    .catch((error)=>console.log(error))
+}
+

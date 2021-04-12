@@ -12,7 +12,7 @@ const { film,displayDetailForFilm } = this.props
 
   return (
     <TouchableOpacity style={styles.main_container}
-    onPress={() => displayDetailForFilm(film.id)}>
+    onPress={() => displayDetailForFilm(film)}>
     <View style={styles.main_container}>
       <Image
         style={styles.image}
@@ -38,6 +38,7 @@ const { film,displayDetailForFilm } = this.props
 
 const styles = StyleSheet.create({
   main_container: {
+    flex:1,
     height:190,
     flexDirection: 'row'
   },

@@ -74,7 +74,7 @@ render() {
     if(this.page<this.totalPage)
     this.getFilms()
   }}*/
-  renderItem={({item}) =>(<FilmItem  displayDetailForFilm={this._displayDetailForFilm} film={item} 
+  renderItem={({item}) =>(<FilmItem   displayDetailForFilm={this._displayDetailForFilm} film={item} 
   >
   </FilmItem>
   

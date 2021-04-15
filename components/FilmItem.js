@@ -3,10 +3,25 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native'
 import {getImage} from '../API/TMDB'
+import {connect} from 'react-redux'
+
 
 class FilmItem extends React.Component {
+
+
+  coeurChemin=""
+ 
+  showCoeur()
+  {
+    if(this.props.favoritesFilm.findIndex(item=>item.id===this.props.film.id)!==-1)
+    this.coeurChemin=require("../assets/img/ic_favorite.png")
+    else 
+    this.coeurChemin=""
+    
+  }
   // Components/FilmItem.js
 render() {
+  
 //const film=this.props.film
 const { film,displayDetailForFilm } = this.props
 
@@ -18,8 +33,14 @@ const { film,displayDetailForFilm } = this.props
         style={styles.image}
         source={{uri: getImage(film.poster_path)}}
       />
+
       <View style={styles.content_container}>
         <View style={styles.header_container}>
+
+          <Image style={styles.coeur}source={this.coeurChemin}>
+          {this.showCoeur()}
+          </Image>
+
           <Text style={styles.title_text}>{film.title}</Text>
           <Text style={styles.vote_text}>{film.vote_average}</Text>
         </View>
@@ -81,7 +102,19 @@ const styles = StyleSheet.create({
   date_text: {
     textAlign: 'right',
     fontSize: 14
+  },
+  coeur:{
+    height:20,
+    width:20,
+    marginRight:5
   }
 })
 
-export default FilmItem
+
+//connect le state de l'application avec le props du filmDetail
+const mapStateToProps = (state) => {
+  return {
+    favoritesFilm: state.favoritesFilm
+  }
+}
+export default connect(mapStateToProps)(FilmItem)

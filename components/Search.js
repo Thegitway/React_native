@@ -3,6 +3,7 @@ import React from 'react'
 import { FlatList,StyleSheet, View, TextInput,ActivityIndicator, Button} from 'react-native'
 import FilmItem from '../components/FilmItem.js';
 import {getFilm} from '../API/TMDB'
+import {connect} from 'react-redux'
 
 class Search extends React.Component {
     constructor(props)
@@ -68,13 +69,17 @@ render() {
                     </View>
                     <FlatList
   data={this.state.films}
-  keyExtractor={(item)=>item.id.toString()}
+  extraData={this.props.favoritesFilm}
+    keyExtractor={(item)=>item.id.toString()}
  /* onEndReachedThreshold={0.5}
   onEndReached={()=>{
     if(this.page<this.totalPage)
     this.getFilms()
   }}*/
-  renderItem={({item}) =>(<FilmItem   displayDetailForFilm={this._displayDetailForFilm} film={item} 
+  renderItem={({item}) =>(<FilmItem  
+    isFilmFavorite={(this.props.favoritesFilm.findIndex(film => film.id === item.id) !== -1) ? true : false} 
+    displayDetailForFilm={this._displayDetailForFilm} 
+    film={item} 
   >
   </FilmItem>
   
@@ -122,4 +127,11 @@ buttons:{
     alignSelf:'center'
 }})
 
- export default Search
+
+//connect le state de l'application avec le props du search
+const mapStateToProps = (state) => {
+  return {
+    favoritesFilm: state.favoritesFilm
+  }
+}
+export default connect(mapStateToProps)(Search)

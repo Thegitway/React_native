@@ -11,14 +11,18 @@ class FilmItem extends React.Component {
 
   coeurChemin=""
  
-  showCoeur()
-  {
-    if(this.props.favoritesFilm.findIndex(item=>item.id===this.props.film.id)!==-1)
-    this.coeurChemin=require("../assets/img/ic_favorite.png")
-    else 
-    this.coeurChemin=""
-    
+  _displayFavoriteImage() {
+    if (this.props.isFilmFavorite) {
+      // Si la props isFilmFavorite vaut true, on affiche le 🖤
+      return (
+        <Image
+          style={styles.coeur}
+          source={require('../assets/img/ic_favorite.png')}
+        />
+      )
+    }
   }
+
   // Components/FilmItem.js
 render() {
   
@@ -37,10 +41,7 @@ const { film,displayDetailForFilm } = this.props
       <View style={styles.content_container}>
         <View style={styles.header_container}>
 
-          <Image style={styles.coeur}source={this.coeurChemin}>
-          {this.showCoeur()}
-          </Image>
-
+          {this._displayFavoriteImage()}
           <Text style={styles.title_text}>{film.title}</Text>
           <Text style={styles.vote_text}>{film.vote_average}</Text>
         </View>

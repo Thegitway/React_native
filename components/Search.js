@@ -23,13 +23,15 @@ class Search extends React.Component {
     }
 
     getFilms=()=>{
+      if(this.searchText.length>0)
+      {
         this.setState({isLoading:true})
         getFilm(this.searchText,this.page+1).then(movie=>
             {this.page=movie.page
                 this.totalPage=movie.total_pages 
                 this.setState({films:[...this.state.films,...movie.results],isLoading:false})
 
-    })
+    })}
 
 }
 

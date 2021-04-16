@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import Search from '../components/Search'
 import FilmDetail from '../components/FilmDetail'
 import Favorie from '../components/Favorie'
-
+import GoogleMap from '../components/GoogleMap'
 const SearchStackNavigator = createStackNavigator({
   Search: {
     screen: Search,
@@ -44,11 +44,23 @@ const MoviesTabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
         return <Image
-          source={require('../assets/img/ic_favorite.png')}
+          source={require('../assets/img/ic_heart.png')}
           style={styles.icon}/> // On applique un style pour les redimensionner comme il faut
       }
     }
     },
+    GoogleMap: {
+      title:'Google Map',
+      screen: GoogleMap,
+      navigationOptions: {
+        tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
+          return <Image
+            source={require('../assets/img/ic_GoogleMap.png')}
+            style={styles.icon}/> // On applique un style pour les redimensionner comme il faut
+        }
+      }
+      },
+    
     },
       {
       tabBarOptions: {

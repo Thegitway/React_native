@@ -58,10 +58,10 @@ const value=this.props.navigation.state.params.film
 const styles = StyleSheet.create({
   image: {
     height:190,
-    flex:3
+    
   },
   title:{
-    flex:1,
+    
     fontSize:35,
     margin:10,
     fontWeight:"bold",
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   description:{
     padding:10,
-    flex:4,
+    
   },
   data:{fontWeight:'500',
 paddingLeft:8},

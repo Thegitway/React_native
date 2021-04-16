@@ -1,13 +1,12 @@
 // Components/Favorites.js
 
 import React from 'react'
-import { StyleSheet } from 'react-native'
-import { FlatList} from 'react-native'
+import { StyleSheet,FlatList,View} from 'react-native'
 import FilmItem from './FilmItem'
 import {connect} from 'react-redux'
 
 class Favorie extends React.Component {
-    
+
     _displayDetailForFilm = (movie) => {
         console.log("Display film with id "+movie.id)
         this.props.navigation.navigate("FilmDetail", { film: movie })
@@ -16,6 +15,7 @@ class Favorie extends React.Component {
   render() {
 
     return (
+        <View style={{paddingTop:50}}>
         <FlatList
         data={this.props.favoritesFilm}
           keyExtractor={(item)=>item.id.toString()}
@@ -25,7 +25,9 @@ class Favorie extends React.Component {
           film={item} 
         >
         </FilmItem>
+       
         )}/>
+         </View>
     )
   }
 }

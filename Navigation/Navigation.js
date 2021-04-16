@@ -29,7 +29,6 @@ const MoviesTabNavigator = createBottomTabNavigator({
   Search: {
     screen: SearchStackNavigator,
     navigationOptions: {
-
       tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
         return <Image
           source={require('../assets/img/ic_search.png')}
@@ -39,14 +38,17 @@ const MoviesTabNavigator = createBottomTabNavigator({
  
  
   Favorites: {
+    title:'Favories',
+
     screen: Favorie,
     navigationOptions: {
-      title:"Favories",
       tabBarIcon: () => { // On définit le rendu de nos icônes par les images récemment ajoutés au projet
         return <Image
           source={require('../assets/img/ic_favorite.png')}
           style={styles.icon}/> // On applique un style pour les redimensionner comme il faut
-      }}},
+      }
+    }
+    },
     },
       {
       tabBarOptions: {

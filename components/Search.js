@@ -22,18 +22,18 @@ class Search extends React.Component {
       this.props.navigation.navigate("FilmDetail", { film: movie })
     }
 
-    getFilms(){
+    getFilms=()=>{
         this.setState({isLoading:true})
         getFilm(this.searchText,this.page+1).then(movie=>
             {this.page=movie.page
                 this.totalPage=movie.total_pages 
-                this.setState({films:movie.results,isLoading:false})
+                this.setState({films:[...this.state.films,...movie.results],isLoading:false})
 
     })
 
 }
 
-_searchFilms() {
+_searchFilms=()=> {
     this.page = 0
     this.totalPage = 0
     this.setState({
@@ -71,11 +71,11 @@ render() {
   data={this.state.films}
   extraData={this.props.favoritesFilm}
     keyExtractor={(item)=>item.id.toString()}
- /* onEndReachedThreshold={0.5}
+  onEndReachedThreshold={0.5}
   onEndReached={()=>{
     if(this.page<this.totalPage)
     this.getFilms()
-  }}*/
+  }}
   renderItem={({item}) =>(<FilmItem  
     isFilmFavorite={(this.props.favoritesFilm.findIndex(film => film.id === item.id) !== -1) ? true : false} 
     displayDetailForFilm={this._displayDetailForFilm} 

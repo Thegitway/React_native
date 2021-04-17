@@ -1,10 +1,14 @@
 // Components/FilmItem.js
 
 import React from 'react'
-import {View, StyleSheet,TouchableOpacity,Image,Button,Text} from 'react-native'
+import {View, StyleSheet,ActivityIndicator,TouchableOpacity,Image,Button,Text} from 'react-native'
 import {getImage} from '../API/TMDB'
 import {connect} from 'react-redux'
+import {getVideo} from '../API/TMDB'
+import YoutubePlayer from "react-native-yt-player";
+
 class FilmDetail extends React.Component {
+
 
 
   _toggleFavorite()
@@ -13,6 +17,14 @@ class FilmDetail extends React.Component {
     //envoie de l'action vers le store
     this.props.dispatch(action)
   }
+ 
+  getVideos=()=>{
+    getVideo(this.props.navigation.state.params.film.id).then(video=>{
+      console.log(video.results[0].key)
+     return video.results[0].key
+  })
+}
+  
 
   _displayFavoriteImage()
   {
@@ -25,26 +37,41 @@ class FilmDetail extends React.Component {
       style={styles.favortieImage}/>
     )
   }
+  
 
   componentDidUpdate()
-  {
-    console.log(this.props.favoritesFilm);
+  { 
+    console.log(this.props.favoritesFilm)
   }
+
   // Components/FilmItem.js
 render() {
-const value=this.props.navigation.state.params.film
+  
+  const value=this.props.navigation.state.params.film
+  
+ 
   return (
+
     <View >
      <Image
         style={styles.image}
         source={{uri: getImage(value.poster_path)}}
       />
+     <YoutubePlayer
+      videoId={"vM-Bja2Gy04"}
+      autoPlay
+      onStart={() => console.log("onStart")}
+      onEnd={() => alert("on End")}
+      />
+      
+
               <Text style={styles.title} >{value.title}</Text>
 
               <TouchableOpacity style={styles.favorisButton} 
       onPress={()=>this._toggleFavorite()}>
         {this._displayFavoriteImage()}
       </TouchableOpacity>
+
         <Text style={styles.description} >{value.overview}</Text>
         <Text style={styles.data} >Date de sortie: {value.release_date}</Text>
         <Text style={styles.data} >Note: {value.vote_average}</Text>

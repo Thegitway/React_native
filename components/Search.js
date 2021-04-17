@@ -4,6 +4,7 @@ import { FlatList,StyleSheet, View, TextInput,ActivityIndicator, Button} from 'r
 import FilmItem from '../components/FilmItem.js';
 import {getFilm} from '../API/TMDB'
 import {connect} from 'react-redux'
+import {getVideo} from '../API/TMDB'
 
 class Search extends React.Component {
     constructor(props)
@@ -16,10 +17,13 @@ class Search extends React.Component {
 }  
       this.searchText=""
     }
+    
 
     _displayDetailForFilm = (movie) => {
       console.log("Display film with id "+movie.id)
-      this.props.navigation.navigate("FilmDetail", { film: movie })
+      this.props.navigation.navigate("FilmDetail", { film: movie,/* youtube:getVideo(movie.id).then(video=>{
+       return video.results[0].key
+    })*/ })
     }
 
     getFilms=()=>{
@@ -62,8 +66,11 @@ updateText(text)
 }
 
 render() {
+
   return (
+    
     <View>
+     
         <TextInput onSubmitEditing={()=> this._searchFilms()} onChangeText={(text)=> this.updateText(text)} style={styles.container} placeholder='Title of the movie'>
             </TextInput><View style={styles.buttons}>
                 <Button onPress={()=> this._searchFilms()} color="red" title='Search'>
@@ -76,7 +83,9 @@ render() {
   onEndReachedThreshold={0.5}
   onEndReached={()=>{
     if(this.page<this.totalPage)
+    {
     this.getFilms()
+    }
   }}
   renderItem={({item}) =>(<FilmItem  
     isFilmFavorite={(this.props.favoritesFilm.findIndex(film => film.id === item.id) !== -1) ? true : false} 
